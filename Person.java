@@ -16,8 +16,8 @@ public abstract class Person {
 		zipCode = 0;
   }
   
-  public abstract save();
-  public abstract load(int id);
+  public abstract void save();
+  public abstract void load(int id);
   
   //This method returns the name of a member
 	public String getName() {
