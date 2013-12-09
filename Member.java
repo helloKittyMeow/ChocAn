@@ -118,14 +118,14 @@ class Member {
 	//This method writes member data to a file.
 	public void save(){
 		String file_name = id + ".txt";
-		try{
+		try {
 			File file = new File(file_name);
-	 
+	
 			// if file doesnt exists, then create it
 			if (!file.exists()) {
 				file.createNewFile();
 			}
-	 
+	
 			FileWriter fw = new FileWriter(file.getAbsoluteFile());
 			BufferedWriter bw = new BufferedWriter(fw);
 			bw.write(name);
@@ -153,22 +153,21 @@ class Member {
 	}
 
 	//This method reads member file.
-	public void load(int id){
+	public void load(int id) {
 		String file_name = id + ".txt";
 		Member member = new Member();
 		int count = 0;
-		try{
-
+		try {
 			BufferedReader br = new BufferedReader(new FileReader(file_name));
 			String strLine;
 			//Read File Line By Line
-			while ((strLine = br.readLine()) != null)   {
+			while ((strLine = br.readLine()) != null) {
 			  // Print the content on the console
 				if (count == 0){
 					setName(strLine);
 					count++;
 				}
-				else if (count == 1){
+				else if (count == 1) {
 				    try{
 						// the String to int conversion happens here
 						int i = Integer.parseInt(strLine.trim());
@@ -246,7 +245,7 @@ class Member {
 			System.out.println("Please input a number ");
 		  }
 		} while (true);
-	}	
+	}
 	
 
 	//This method adds a member.
