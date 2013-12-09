@@ -1,148 +1,247 @@
-import java.util.*;
+import java.io.BufferedWriter; 
+import java.io.BufferedReader; 
+import java.io.File; 
+import java.io.FileWriter; 
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.DataInputStream;
 
-public class Member {
-  static final int SUSPENDED = 0;
-  static final int ACTIVE = 1;
-  private String name;
-  private int id;
-  private String streetAddress;
-  private String city;
-  private String state;
-  private int zipCode;
-  private int active;
-  private List<Service> services;
-  
-  public String getName()
-This method returns the name of a member
-{
-  return name;
-}
 
-public void setName(String name)
-This method sets the name of a member
-{
-  this.name = name;
-}
+class Member {
+	
+	private final static int ACTIVE = 1;
+	private final static int SUSPENDED = 2;
+	private String name;
+	private int id;
+	private String streetAddress;
+	private String city;
+	private String state;
+	private int zipCode;
+	private int active;
+	
+	public Member(){
+		name = null;
+		id = 0;
+		streetAddress = null;
+		city = null;
+		state = null;
+		zipCode = 0;
+		active = 0;
+	}
+	
+	//This method returns the name of a member
+	public String getName(){
+	  return name;
+	}
 
-public int getID()
-This method returns the id of a member
-{
-  return id;
-}
+	//This method sets the name of a member
+	public void setName(String name){
+	  this.name = name;
+	}
 
-public void setID(int id)
-This method sets the id of a member
-{
-  this.id = id;
-}
+	//This method returns the id of a member
+	public int getID(){
+	  return id;
+	}
 
-public String getStreetAddress()
-This method returns the street address of a member
-{
-  return streetAddress;
-}
+	//This method sets the id of a member
+	public void setID(int id){
+	  this.id = id;
+	}
 
-public void setStreetAddress(String streetAddress)
-This method sets the street address of a member
-{
-  this.streetAddress = streetAddress;
-}
+	//This method returns the street address of a member
+	public String getStreetAddress(){
+	  return streetAddress;
+	}
 
-public String getCity()
-This method returns the city of a member
-{
-  return city;
-}
+	//This method sets the street address of a member
+	public void setStreetAddress(String streetAddress){
+	  this.streetAddress = streetAddress;
+	}
 
-public void setCity(String city)
-This method sets the city of a member
-{
-  this.city = city;
-}
+	//This method returns the city of a member
+	public String getCity(){
+	  return city;
+	}
 
-public String getState()
-This method returns the state of a member
-{
-  return state;
-}
+	//This method sets the city of a member
+	public void setCity(String city){
+	  this.city = city;
+	}
 
-public void setState(String state)
-This method sets the state of a member
-{
- this.state = state;
-}
+	//This method returns the state of a member
+	public String getState(){
+	  return state;
+	}
 
-public int getZipCode()
-This method returns the zipcode of a member
-{
-  return zipCode;
-}
+	//This method sets the state of a member
+	public void setState(String state){
+	 this.state = state;
+	}
 
-public void setZipCode(int zipCode)
-This method sets the zipcode of a member
-{
-  this.zipCode = zipCode;
-}
+	//This method returns the zipcode of a member
+	public int getZipCode(){
+	  return zipCode;
+	}
 
-public int getStatus()
-This method gets the status of a member
-{
-  return active;
-}
+	//This method sets the zipcode of a member
+	public void setZipCode(int zipCode){
+	  this.zipCode = zipCode;
+	}
 
-public void setStatus(int active)
-This method sets the status of a member
-{
-  this.active = active;
-}
+	//This method gets the status of a member
+	public int getStatus(){
+	  return active;
+	}
 
-public void addService(Bill service)
-This method adds a service to a member
-{
-   services.add(service);
-}
+	//This method sets the status of a member
+	public void setStatus(int active){
+	  this.active = active;
+	}
 
-public Iterator getServices()
-This method returns services of a member
-{
-   return services;
-}
+	/*
+	//This method adds a service to a member
+	public void addService(Bill service){
+	   services.add(service);
+	}
+	
+	
+	//This method returns services of a member
+	public Iterator getServices(){
+	   return services;
+	}
+	*/
+	
+	//This method writes member data to a file.
+	public void save(){
+		String file_name = id + ".txt";
+		try{
+			File file = new File(file_name);
+	 
+			// if file doesnt exists, then create it
+			if (!file.exists()) {
+				file.createNewFile();
+			}
+	 
+			FileWriter fw = new FileWriter(file.getAbsoluteFile());
+			BufferedWriter bw = new BufferedWriter(fw);
+			bw.write(name);
+			bw.newLine();
+			bw.write(id);
+			bw.newLine();
+			bw.write(streetAddress);
+			bw.newLine();
+			bw.write(city);
+			bw.newLine();
+			bw.write(state);
+			bw.newLine();
+			bw.write(zipCode);
+			bw.newLine();
+			bw.write(active);
+			bw.close();
+	 
+			System.out.println("Done writing.");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 
-public void save()
-This method writes member data to a file.
-{
-  create a file (‚Äúid.txt‚Äù) if it doesn‚Äôt exist;
-  otherwise write member data to a file.
-}
+	//This method reads member file.
+	public void load(int id){
+		String file_name = id + ".txt";
+		Member member = new Member();
+		try{
 
-public void load(int id)
-This method reads member file.
-{
-  Member member.
-  open a file (‚Äúid.txt‚Äù).
-  read name and setName(name);
-  setID(id);
-  read street_address and setStreetAddress(street_address);
-  read city and setCity(city);
-  read state and setSate(state);
-  read zip_code and setZipCode(zip_code);
-  read status and setStatus(status);
-  read services and for each service addService(services);
-}
+			BufferedReader br = new BufferedReader(new FileReader(file_name));
+			String strLine;
+			//Read File Line By Line
+			while ((strLine = br.readLine()) != null)   {
+			  // Print the content on the console
+			  System.out.println (strLine);
+		}
+		//Close the input stream
+		br.close();
+		}catch (Exception e){//Catch exception if any
+		  System.err.println("Error: " + e.getMessage());
+		}
+	}
 
-public void addMember()
-This method adds a member.
-{ 
-  Member member = new Member();
-  Get member info from the user;
-  set all the member info data;
-  save the member to a file (‚Äúid.txt‚Äù)
-}
+	
 
-public int removeMember(int id)
-This method removes a member.
-{
-  open a file (‚Äúid.txt‚Äù). 
-  If found delete the file and print a ‚ÄúDeleted‚Äù message.
-  Else print ‚ÄúNo such member‚Äù.
+	//This method adds a member.
+	public void addMember(){ 
+		int i = 0;
+		Member member = new Member();
+		DataInputStream input = new DataInputStream(System.in);
+		String temp;
+	
+		System.out.print("Enter the member name: ");
+		this.name = input.readLine();
+		System.out.print("Enter the member id: ");
+		temp = input.readLine();
+		try{
+			i = Integer.parseInt(temp.trim());
+		}
+		catch (NumberFormatException nfe)
+		{
+		  System.out.println("NumberFormatException: " + nfe.getMessage());
+		}
+
+		this.id = i;
+		System.out.print("Enter the member streetAddress: ");
+		this.streetAddress = input.readLine();
+		System.out.print("Enter the member city: ");
+		this.city = input.readLine();
+		System.out.print("Enter the member state: ");
+		this.state = input.readLine();
+		System.out.print("Enter the member zipCode: ");
+		temp = input.readLine();
+		try{
+			i = Integer.parseInt(temp.trim());
+		}
+		catch (NumberFormatException nfe)
+		{
+		  System.out.println("NumberFormatException: " + nfe.getMessage());
+		}
+		this.zipCode = i;
+		System.out.print("Enter the member active: ");
+		temp = input.readLine();
+		try{
+			i = Integer.parseInt(temp.trim());
+		}
+		catch (NumberFormatException nfe)
+		{
+		  System.out.println("NumberFormatException: " + nfe.getMessage());
+		}
+		this.active = i;
+	/*	
+		Get member info from the user;
+
+		set all the member info data;
+
+		save the member to a file (ìid.txtî)
+		*/
+
+	}
+
+/*
+	public int removeMember(int id)
+
+	This method removes a member.
+
+	{
+
+	  open a file (ìid.txtî). 
+
+	 If found delete the file and print a ìDeletedî message.
+
+	  Else print ìNo such memberî.
+
+	}
+*/
+
+
+
+
+
 }
