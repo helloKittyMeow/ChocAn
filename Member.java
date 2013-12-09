@@ -1,10 +1,10 @@
-import java.io.BufferedWriter; 
+/*import java.io.BufferedWriter; 
 import java.io.BufferedReader; 
 import java.io.File; 
 import java.io.FileWriter; 
 import java.io.FileReader;
 import java.io.IOException;
-import java.io.DataInputStream;
+import java.io.DataInputStream;*/
 import java.io.*;
 import java.util.*;
 import java.text.*;
@@ -44,18 +44,6 @@ public class Member extends Person {
 	 // return services;
     return (services.listIterator());
 	}
-  
-  public String toString() {
-    String string = "Member name: " + getName() + "\nid: " + getID() + "\naddress: " + getStreetAddress() + "\ncity: " + getCity() + "\nstate: " + getState() + "\nzipCode " + getZipCode() + "\nstatus " + getStatus();
-    string += "\nBILLS: [";
-    for (Iterator iterator = services.iterator(); iterator.hasNext(); ) {
-      Bill bill = (Bill) iterator.next();
-      string += " " + bill.getDateServiceProvided();
-    }
-    string += "]";
-    return string;
-  }
-	
 	
 	//This method writes member data to a file.
 	public void save() {
@@ -223,4 +211,16 @@ public class Member extends Person {
 			return 1;
 		}
 	}
+  
+  public String toString() {
+    String string = "Member name: " + getName() + "\nid: " + getID() + "\naddress: " + getStreetAddress() + "\ncity: " + getCity() + "\nstate: " + getState() + "\nzipCode " + getZipCode() + "\nstatus " + getStatus();
+    string += "\nBILLS: [";
+    for (Iterator iterator = services.iterator(); iterator.hasNext(); ) {
+      Bill bill = (Bill) iterator.next();
+      string += " " + bill.getDateServiceProvided();
+    }
+    string += "]";
+    return string;
+  }
 }
+
