@@ -1,33 +1,8 @@
 import java.util.*;
 import java.io.*;
 public class UserInterface {
-//  private static final Scanner scanner = new Scanner(System.in).useDelimiter("\n");
   private static BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-/*
-  // Ask the user for their choice of commands
-  private static int getCommand() {
-    while (true) {
-      System.out.print("Enter command: ");
-      int value = scanner.nextInt();
-      if (value >= EXIT) {// && value <= HELP) {
-        return value;
-      }
-    }
-  }
-  
-  // Asks the user a yes or no question.
-  // Returns true if the answer was yes and false if the answer was no
-  private boolean yesOrNo(String prompt) {
-    System.out.println(prompt + " y/n");
-    String more = scanner.next();
-    if (more.contentEquals("y") || more.contentEquals("Y"))
-      return true;
-    else if (more.contentEquals("n") || more.contentEquals("N"))
-      return false;
-    else
-      return yesOrNo(prompt);
-  }
-*/
+
   private static String getToken(String prompt) {
     while (true) {
       try {
@@ -67,10 +42,10 @@ public class UserInterface {
     do {
       System.out.println("\nMAIN MENU");
       System.out.println("Enter a number between " + PROVIDER + " and " + EXIT + " as explained below:");
-      System.out.println(PROVIDER + " to test the provider terminal");
-      System.out.println(MANAGER + " to test the manager terminal");
-      System.out.println(OPERATOR + " to test the operator terminal");
-      System.out.println(EXIT + " to exit");
+      System.out.println("  " + PROVIDER + " to test the provider terminal");
+      System.out.println("  " + MANAGER + " to test the manager terminal");
+      System.out.println("  " + OPERATOR + " to test the operator terminal");
+      System.out.println("  " + EXIT + " to exit");
       
       command = getNumber("Enter command: ", 1, 4);
     
@@ -86,7 +61,27 @@ public class UserInterface {
   }
   
   public static void displayProviderTerminal() {
-  
+    final int BILL_CHOCAN = 1;
+    final int VIEW_DIRECTORY = 2;
+    final int EXIT = 3;
+    
+    int command;
+    do {
+      System.out.println("\nMANAGER TERMINAL");
+      System.out.println("Enter a number between " + BILL_CHOCAN + " and " + EXIT + " as explained below:");
+      System.out.println("  " + BILL_CHOCAN + " to bill ChocAn");
+      System.out.println("  " + VIEW_DIRECTORY + " to view the Provider Directory");
+      System.out.println("  " + EXIT + " to exit");
+      
+      command = getNumber("Enter command: ", 1, 3);
+    
+      switch (command) {
+        case BILL_CHOCAN:		    //displayProviderTerminal();
+                                break;
+        case VIEW_DIRECTORY:	  ProviderDirectory.printServices();
+                                break;
+      }
+    } while (command != EXIT);
   }
 
   public static void displayManagerTerminal() {
@@ -99,10 +94,10 @@ public class UserInterface {
     do {
       System.out.println("\nMANAGER TERMINAL");
       System.out.println("Enter a number between " + MEMBER_REPORT + " and " + EXIT + " as explained below:");
-      System.out.println(MEMBER_REPORT + " to create a member report");
-      System.out.println(PROVIDER_REPORT + " to create a provider report");
-      System.out.println(SUMMARY_REPORT + " to create a summary report");
-      System.out.println(EXIT + " to exit");
+      System.out.println("  " + MEMBER_REPORT + " to create a member report");
+      System.out.println("  " + PROVIDER_REPORT + " to create a provider report");
+      System.out.println("  " + SUMMARY_REPORT + " to create a summary report");
+      System.out.println("  " + EXIT + " to exit");
       
       command = getNumber("Enter command: ", 1, 4);
     
@@ -126,9 +121,9 @@ public class UserInterface {
     do {
       System.out.println("\nOPERATOR TERMINAL");
       System.out.println("Enter a number between " + MANAGE_MEMBER + " and " + EXIT + " as explained below:");
-      System.out.println(MANAGE_MEMBER + " to manage a member");
-      System.out.println(MANAGE_PROVIDER + " to manage a provider");
-      System.out.println(EXIT + " to exit");
+      System.out.println("  " + MANAGE_MEMBER + " to manage a member");
+      System.out.println("  " + MANAGE_PROVIDER + " to manage a provider");
+      System.out.println("  " + EXIT + " to exit");
       
       command = getNumber("Enter command: ", 1, 3);
     
