@@ -14,6 +14,7 @@ public class Member extends Person {
 	private BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 	private final static int ACTIVE = 1;
 	private final static int SUSPENDED = 2;
+	private List services = new LinkedList();
 	private int active;
 	
 	public Member() {
@@ -31,22 +32,34 @@ public class Member extends Person {
 	  this.active = active;
 	}
 
-	/*
+	
 	//This method adds a service to a member
 	public void addService(Bill service){
-	   services.add(service);
+	  services.add(service);
 	}
 	
 	
 	//This method returns services of a member
 	public Iterator getServices(){
-	   return services;
+	 // return services;
+    return (services.listIterator());
 	}
-	*/
+  
+  public String toString() {
+    String string = "Member name: " + getName() + "\nid: " + getID() + "\naddress: " + getStreetAddress() + "\ncity: " + getCity() + "\nstate: " + getState() + "\nzipCode " + getZipCode() + "\nstatus " + getStatus();
+    string += "\nBILLS: [";
+    for (Iterator iterator = services.iterator(); iterator.hasNext(); ) {
+      Bill bill = (Bill) iterator.next();
+      string += " " + bill.getDateServiceProvided();
+    }
+    string += "]";
+    return string;
+  }
+	
 	
 	//This method writes member data to a file.
 	public void save() {
-		String file_name = id + ".txt";
+		String file_name = getID() + ".txt";
 		try {
 			File file = new File(file_name);
 	
@@ -57,18 +70,18 @@ public class Member extends Person {
 	
 			FileWriter fw = new FileWriter(file.getAbsoluteFile());
 			BufferedWriter bw = new BufferedWriter(fw);
-			bw.write(name);
+			bw.write(getName());
 			bw.newLine();
-			String ID = id + "";
+			String ID = getID() + "";
 			bw.write(ID);
 			bw.newLine();
-			bw.write(streetAddress);
+			bw.write(getStreetAddress());
 			bw.newLine();
-			bw.write(city);
+			bw.write(getCity());
 			bw.newLine();
-			bw.write(state);
+			bw.write(getState());
 			bw.newLine();
-			String ZIP = zipCode + "";
+			String ZIP = getZipCode() + "";
 			bw.write(ZIP);
 			bw.newLine();
 			String ACTIVE = active + "";
@@ -181,15 +194,14 @@ public class Member extends Person {
 	public void addMember(){ 
 		int i = 0;
 		Member member = new Member();
-		DataInputStream input = new DataInputStream(System.in);
 		String temp;
 		
-		name = getToken("Enter the member name: ");
-		id = getNumber("Enter the member id: ");
-		streetAddress = getToken("Enter the member streetAddress: ");
-		city = getToken("Enter the member city: ");
-		state = getToken("Enter the member state: ");
-		zipCode = getNumber("Enter the member zipCode: ");
+		setName(getToken("Enter the member name: "));
+		setID(getNumber("Enter the member id: "));
+		setStreetAddress(getToken("Enter the member streetAddress: "));
+		setCity(getToken("Enter the member city: "));
+		setState(getToken("Enter the member state: "));
+		setZipCode(getNumber("Enter the member zipCode: "));
 		active = getNumber("Enter the member active: ");
 		
 		save();
@@ -210,6 +222,5 @@ public class Member extends Person {
 			System.out.println("No such member: " + file_name);
 			return 1;
 		}
-		return 0;
 	}
 }
