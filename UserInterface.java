@@ -47,8 +47,8 @@ public class UserInterface {
       System.out.println("  " + OPERATOR + " to test the operator terminal");
       System.out.println("  " + EXIT + " to exit");
       
-      command = getNumber("Enter command: ", 1, 4);
-    
+      command = getNumber("Enter command: ", 1, EXIT);
+      
       switch (command) {
         case PROVIDER:		displayProviderTerminal();
                           break;
@@ -73,8 +73,8 @@ public class UserInterface {
       System.out.println("  " + VIEW_DIRECTORY + " to view the Provider Directory");
       System.out.println("  " + EXIT + " to exit");
       
-      command = getNumber("Enter command: ", 1, 3);
-    
+      command = getNumber("Enter command: ", 1, EXIT);
+      
       switch (command) {
         case BILL_CHOCAN:		    //displayProviderTerminal();
                                 break;
@@ -99,8 +99,8 @@ public class UserInterface {
       System.out.println("  " + SUMMARY_REPORT + " to create a summary report");
       System.out.println("  " + EXIT + " to exit");
       
-      command = getNumber("Enter command: ", 1, 4);
-    
+      command = getNumber("Enter command: ", 1, EXIT);
+      
       switch (command) {
         case MEMBER_REPORT:		  //displayProviderTerminal();
                                 break;
@@ -115,7 +115,8 @@ public class UserInterface {
   public static void displayOperatorTerminal() {
     final int MANAGE_MEMBER = 1;
     final int MANAGE_PROVIDER = 2;
-    final int EXIT = 3;
+    final int MANAGE_DIRECTORY = 3;
+    final int EXIT = 4;
     
     int command;
     do {
@@ -123,17 +124,19 @@ public class UserInterface {
       System.out.println("Enter a number between " + MANAGE_MEMBER + " and " + EXIT + " as explained below:");
       System.out.println("  " + MANAGE_MEMBER + " to manage a member");
       System.out.println("  " + MANAGE_PROVIDER + " to manage a provider");
+      System.out.println("  " + MANAGE_DIRECTORY + " to manage the Provider Directory");
       System.out.println("  " + EXIT + " to exit");
       
-      command = getNumber("Enter command: ", 1, 3);
-    
+      command = getNumber("Enter command: ", 1, EXIT);
+      
       switch (command) {
         case MANAGE_MEMBER:		  ManagePerson.manageMember();
                                 break;
         case MANAGE_PROVIDER:	  ManagePerson.manageProvider();
                                 break;
+        case MANAGE_DIRECTORY:	ProviderDirectory.manage();
+                                break;
       }
     } while (command != EXIT);
   }
 }
-  
