@@ -49,9 +49,9 @@ public class ProviderReport {
     //    pStream.print(service.getMemberName() + "\n"); 
         pStream.print(service.getMemberID() + "\n"); 
         pStream.print(service.getServiceCode() + "\n"); 
-        pStream.print(service.getFee() + "\n"); 
+    //    pStream.print(service.getFee() + "\n"); 
         membersConsulted += 1;
-        feeTotal += service.getFee();
+    //    feeTotal += service.getFee();
       }
       
       pStream.print(membersConsulted + "\n"); 
