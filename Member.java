@@ -246,16 +246,13 @@ public class Member extends Person {
 
 	//This method adds a member.
 	public void addMember(){ 
-		int i = 0;
-		Member member = new Member();
-		
 		setName(getToken("Enter the member name: "));
 		setID(getNumber("Enter the member id: "));
 		setStreetAddress(getToken("Enter the member streetAddress: "));
 		setCity(getToken("Enter the member city: "));
 		setState(getToken("Enter the member state: "));
 		setZipCode(getNumber("Enter the member zipCode: "));
-		active = getNumber("Enter the member active: ");
+		active = ACTIVE;
 		
 		save();
 	}
@@ -263,7 +260,6 @@ public class Member extends Person {
 	//This method removes a member.
 	public int removeMember(int id){
 		String file_name = id + ".txt";
-		Member member = new Member();
 		File f = new File(file_name);
 		if (f.exists()) {
 			boolean success = f.delete();
