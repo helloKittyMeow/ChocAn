@@ -7,6 +7,9 @@ public class Test{
 
 		Member m = new Member();
     Bill b = new Bill("gg", "bb", 999, 123, 777, "GOOD DAY SIR");
+    Bill a = new Bill("gg", "aa", 999, 123, 777, "GOOD DAY SIR");
+    m.addService(b);
+		m.addService(a);
 		m.addMember();
 		m.load(123);
 		
@@ -18,9 +21,8 @@ public class Test{
 		System.out.println(m.getCity());
 		System.out.println(m.getState());
 		System.out.println(m.getZipCode());
-		System.out.println(m.getStatus());
 
-		m.addService(b);
+
     System.out.println( m.toString());
 
 	}
