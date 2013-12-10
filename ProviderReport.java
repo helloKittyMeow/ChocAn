@@ -5,20 +5,18 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 
 public class ProviderReport {
-
-  public ProviderReport() {}
-
-  Provider provider = new Provider();
   
-  FileOutputStream outStream = null;
-  PrintStream pStream = null;
-  int i;
-  char c;
-  double feeTotal = 0;
-  int membersConsulted = 0;
-  File outFile;
+  public static void printReport(int id) {
+    Provider provider = new Provider();
   
-  public void printReport(int id) {
+    FileOutputStream outStream = null;
+    PrintStream pStream = null;
+    int i;
+    char c;
+    double feeTotal = 0;
+    int membersConsulted = 0;
+    File outFile;
+    
     try {
       provider.load(id);
       DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");//exclude hhmmss?
@@ -45,12 +43,12 @@ public class ProviderReport {
       
       Iterator services = provider.getServices();
       while (services.hasNext()) {
-        Service service = (Service)(services.next());
-        pStream.print(service.getDateOfService() + "\n"); 
-        pStream.print(service.getDateReceived() + "\n"); 
-        pStream.print(service.getMemberName() + "\n"); 
-        pStream.print(service.getMemberCode() + "\n"); 
-        pStream.print(service.getCode() + "\n"); 
+        Bill service = (Bill)(services.next());
+        pStream.print(service.getDateCreated() + "\n"); 
+        pStream.print(service.getDateServiceProvided() + "\n"); 
+    //    pStream.print(service.getMemberName() + "\n"); 
+        pStream.print(service.getMemberID() + "\n"); 
+        pStream.print(service.getServiceCode() + "\n"); 
         pStream.print(service.getFee() + "\n"); 
         membersConsulted += 1;
         feeTotal += service.getFee();
