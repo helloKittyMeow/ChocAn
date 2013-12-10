@@ -40,21 +40,39 @@ public class Bill{
   public String getDateCreated() {
     return dateCreated;
   }
+  public void setDateCreated(String dateCreated) {
+    this.dateCreated = dateCreated;
+  }
   public String getDateServiceProvided() {
     return dateServiceProvided;
+  }
+  public void setDateServiceProvided(String dateServiceProvided) {
+    this.dateServiceProvided = dateServiceProvided;
   }
   public int getProviderID() {
     return providerID;
   }
+  public void setProviderID(int providerID) {
+    this.providerID = providerID;
+  }
   public int getMemberID() {
     return memberID;
+  }
+  public void setMemberID(int memberID) {
+    this.memberID = memberID;
   }
   public int getServiceCode() {
     return serviceCode;
   }
+  public void setServiceCode(int serviceCode) {
+    this.serviceCode = serviceCode;
+  }  
   public String getComments() {
     return comments;
   }  
+  public void setComments(String comments) {
+    this.comments = comments;
+  } 
   
   public String getToken(String prompt) {
     do {

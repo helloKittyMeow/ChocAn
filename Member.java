@@ -1,10 +1,3 @@
-/*import java.io.BufferedWriter; 
-import java.io.BufferedReader; 
-import java.io.File; 
-import java.io.FileWriter; 
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.DataInputStream;*/
 import java.io.*;
 import java.util.*;
 import java.text.*;
@@ -14,12 +7,13 @@ public class Member extends Person {
 	private BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 	private final static int ACTIVE = 1;
 	private final static int SUSPENDED = 2;
-	private List services = new LinkedList();
+	private List services;
 	private int active;
 	
 	public Member() {
 		super();
 		active = 0;
+    services = new LinkedList();
 	}
 
 	//This method gets the status of a member
@@ -74,6 +68,26 @@ public class Member extends Person {
 			bw.newLine();
 			String ACTIVE = active + "";
 			bw.write(ACTIVE);
+      bw.newLine();
+      
+      for (Iterator iterator = services.iterator(); iterator.hasNext(); ) {
+			  Bill bill = (Bill) iterator.next();
+        bw.write(bill.getDateCreated());
+        bw.newLine();
+        bw.write(bill.getDateServiceProvided());
+        bw.newLine();
+        String providerID = bill.getProviderID() + "";
+        bw.write(providerID);
+        bw.newLine();
+        String memberID = bill.getMemberID() + "";
+        bw.write(memberID);
+        bw.newLine();
+        String serviceCode = bill.getServiceCode() + "";
+        bw.write(serviceCode);
+        bw.newLine();
+        bw.write(bill.getComments());
+        bw.newLine();
+			}
 			bw.close();
 	 
 			System.out.println("Done writing.");
@@ -87,6 +101,7 @@ public class Member extends Person {
 		String file_name = id + ".txt";
 		Member member = new Member();
 		int count = 0;
+    int count2 = 0;
 		try {
 			BufferedReader br = new BufferedReader(new FileReader(file_name));
 			String strLine;
@@ -142,7 +157,58 @@ public class Member extends Person {
 					}
 					count++;
 				}  
+        else if (count > 6) {
+          Bill tempBill = new Bill();
+          if(count2 == 0){
+            tempBill.setDateCreated(strLine);
+            count2++;
+          }
+          if(count2 == 1){
+            tempBill.setDateServiceProvided(strLine);
+            count2++;
+          }
+          if(count2 == 2){
+            try {
+              // the String to int conversion happens here
+              int i = Integer.parseInt(strLine.trim());
+              tempBill.setProviderID(i);
+              count2++;
+            }
+            catch (NumberFormatException nfe){
+              System.out.println("NumberFormatException: " + nfe.getMessage());
+            }
+          }
+          if(count2 == 3){
+            try {
+              // the String to int conversion happens here
+              int i = Integer.parseInt(strLine.trim());
+              tempBill.setMemberID(i);
+              count2++;
+            }
+            catch (NumberFormatException nfe){
+              System.out.println("NumberFormatException: " + nfe.getMessage());
+            }
+          }
+          if(count2 == 4){
+            try {
+              // the String to int conversion happens here
+              int i = Integer.parseInt(strLine.trim());
+              tempBill.setServiceCode(i);
+              count2++;
+            }
+            catch (NumberFormatException nfe){
+              System.out.println("NumberFormatException: " + nfe.getMessage());
+            }
+          }
+          if(count2 == 5){
+            tempBill.setComments(strLine);
+            count2 = 0;
+          }
+          
+          services.add(tempBill);
+        }
       }
+      
       //Close the input stream
       br.close();
 		} catch (Exception e) {//Catch exception if any
@@ -182,7 +248,6 @@ public class Member extends Person {
 	public void addMember(){ 
 		int i = 0;
 		Member member = new Member();
-		String temp;
 		
 		setName(getToken("Enter the member name: "));
 		setID(getNumber("Enter the member id: "));
@@ -213,11 +278,16 @@ public class Member extends Person {
 	}
   
   public String toString() {
-    String string = "Member name: " + getName() + "\nid: " + getID() + "\naddress: " + getStreetAddress() + "\ncity: " + getCity() + "\nstate: " + getState() + "\nzipCode " + getZipCode() + "\nstatus " + getStatus();
+    String string = "Member name: " + getName() + "\nid: " + getID() + "\naddress: " + getStreetAddress() + "\ncity: " + getCity() + "\nstate: " + getState() + "\nzipCode: " + getZipCode() + "\nstatus: " + getStatus();
     string += "\nBILLS: [";
     for (Iterator iterator = services.iterator(); iterator.hasNext(); ) {
       Bill bill = (Bill) iterator.next();
+      string += " " + bill.getDateCreated();
       string += " " + bill.getDateServiceProvided();
+      string += " " + bill.getProviderID();
+      string += " " + bill.getMemberID();
+      string += " " + bill.getServiceCode();
+      string += " " + bill.getComments() + "\n";
     }
     string += "]";
     return string;
