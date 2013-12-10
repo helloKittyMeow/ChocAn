@@ -5,19 +5,17 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 
 public class MemberReport {
-
-  public MemberReport() {}
-
-  Member member = new Member();
   
-  FileOutputStream outStream = null;
-  PrintStream pStream = null;
-  int i;
-  char c;
+  public static void printReport(int id) {
+    Member member = new Member();
   
-  File outFile;
-  
-  public void printReport(int id) {
+    FileOutputStream outStream = null;
+    PrintStream pStream = null;
+    int i;
+    char c;
+    
+    File outFile;
+    
     try {
       member.load(id);
       DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");//exclude hhmmss?
@@ -44,11 +42,11 @@ public class MemberReport {
       
       Iterator services = member.getServices();
       while (services.hasNext()) {
-        Service service = (Service)(services.next());
-        pStream.print(service.dateServiceProvided() + "\n"); 
-        pStream.print(service.getProvider() + "\n"); 
+        Bill service = (Bill)(services.next());
+        pStream.print(service.getDateServiceProvided() + "\n"); 
+        pStream.print(service.getProviderID() + "\n"); 
         //might need to find name via service id number in provider directory or something
-        pStream.print(service.getServiceName() + "\n"); 
+  //      pStream.print(service.getServiceName() + "\n"); 
       }
       
       pStream.close();

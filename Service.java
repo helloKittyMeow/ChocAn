@@ -2,9 +2,9 @@
 public class Service {
   private int code;
   private String name;
-  private float fee;
+  private double fee;
   
-  public Service(int code, String name, float fee) {
+  public Service(int code, String name, double fee) {
     this.code = code;
     this.name = name;
     this.fee = fee;
@@ -31,12 +31,12 @@ public class Service {
   }
 
   // This method returns the fee of a service
-  public float getFee() {
+  public double getFee() {
     return fee;
   }
 
   // This method sets the fee of a service
-  public void setFee(float fee) {
+  public void setFee(double fee) {
     this.fee = fee;
   }
   
