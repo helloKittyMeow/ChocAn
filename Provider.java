@@ -17,7 +17,6 @@ public class Provider extends Person {
 	  services.add(service);
 	}
 	
-	
 	//This method returns services of a provider
 	public Iterator getServices(){
 	 // return services;
@@ -89,7 +88,6 @@ public class Provider extends Person {
 			String strLine;
 			//Read File Line By Line
 			while ((strLine = br.readLine()) != null) {
-			  // Print the content on the console
         if (count == 0){
           setName(strLine);
           count++;
@@ -213,7 +211,6 @@ public class Provider extends Person {
     } while (true);
 	}
 	
-
 	//This method adds a provider.
 	public void addProvider(){ 
 		int i = 0;
