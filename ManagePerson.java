@@ -44,12 +44,12 @@ public class ManagePerson {
     int command;
     do {
       System.out.println("\nMEMBER MANAGEMENT TERMINAL");
-      System.out.println("Enter a number between 1 and 5 as explained below:");
+      System.out.println("Enter a number between 1 and 6 as explained below:");
       System.out.println("  " + ADD_MEMBER + " to add a member");
       System.out.println("  " + REMOVE_MEMBER + " to remove a member");
       System.out.println("  " + ACTIVATE_MEMBER + " to activate a member");
       System.out.println("  " + SUSPEND_MEMBER + " to suspend a member");
-      System.out.println("  " + PRINT_MEMBER_INFO + " to print a member info");
+      System.out.println("  " + PRINT_MEMBER_INFO + " to see a member info");
       System.out.println("  " + EXIT + " to exit");
       
       command = getNumber("Enter command: ", 1, EXIT);  
@@ -80,14 +80,16 @@ public class ManagePerson {
   public static void manageProvider() {
     final int ADD_PROVIDER = 1;
     final int REMOVE_PROVIDER = 2;
-    final int EXIT = 3;
+    final int PRINT_PROVIDER_INFO = 3;
+    final int EXIT = 4;
     
     int command;
     do {
       System.out.println("\nPROVIDER MANAGEMENT TERMINAL");
-      System.out.println("Enter a number between 1 and 3 as explained below:");
+      System.out.println("Enter a number between 1 and 4 as explained below:");
       System.out.println("  " + ADD_PROVIDER + " to add a provider");
       System.out.println("  " + REMOVE_PROVIDER + " to remove a provider");
+      System.out.println("  " + PRINT_PROVIDER_INFO + " to see a provider info");
       System.out.println("  " + EXIT + " to exit");
       
       command = getNumber("Enter command: ", 1, EXIT);
@@ -98,6 +100,10 @@ public class ManagePerson {
                               break;
         case REMOVE_PROVIDER: p.removeProvider(getPersonID());
                               break;
+        case PRINT_PROVIDER_INFO:	p.load(getPersonID());
+                                System.out.println(p.toString());
+                                break;
+                           
       }
     } while (command != EXIT);  
   }
