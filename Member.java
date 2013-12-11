@@ -156,7 +156,7 @@ public class Member extends Person {
 						System.out.println("NumberFormatException: " + nfe.getMessage());
 					}
 					count++;
-				}  
+				}
         else if (count > 6) {
           Bill tempBill = new Bill();
           if(count2 == 0){
