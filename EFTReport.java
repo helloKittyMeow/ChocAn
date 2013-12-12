@@ -20,7 +20,7 @@ public class EFTReport {
       DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");//exclude hhmmss?
       Date date = new Date();
       System.out.println(dateFormat.format(date));
-      outFile = new File("./SummaryReports/" + "Summary" + "_" + date + ".txt");
+      outFile = new File("./EFTReports/" + "Summary" + "_" + date + ".txt");
 
       if (outFile.exists()) {
         outFile.delete();
@@ -38,7 +38,7 @@ public class EFTReport {
         providerFeeTotal = 0;
         tempFee = 0;
         if (file.isFile() && file.getName().startsWith("p")) {
-          provider.load(Person.getFileID());
+          provider.load(Person.getFileID(file.getName()));
           Iterator services = provider.getServices();
           
           //check if any services exist

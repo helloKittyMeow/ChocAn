@@ -44,7 +44,7 @@ public class SummaryReport {
         providerFeeTotal = 0;
         tempFee = 0;
         if (file.isFile() && file.getName().startsWith("p")) {
-          provider.load(Person.getFileID());
+          provider.load(Person.getFileID(file.getName()));
           Iterator services = provider.getServices();
           
           //check if any services exist

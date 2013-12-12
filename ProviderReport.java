@@ -24,7 +24,7 @@ public class ProviderReport {
       DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");//exclude hhmmss?
       Date date = new Date();
       System.out.println(dateFormat.format(date));
-      outFile = new File("./MemberReports/" + provider.getName() + "_" + date + ".txt");
+      outFile = new File("./ProviderReports/" + provider.getName() + "_" + date + ".txt");
 
       if (outFile.exists()) {
         outFile.delete();
