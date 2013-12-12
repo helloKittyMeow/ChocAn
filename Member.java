@@ -100,100 +100,106 @@ public class Member extends Person {
 
   //This method reads member file.
   public void load(int id) {
-  //  String file_name = id + ".txt";
+    //  String file_name = id + ".txt";
     String file_name = memberFileName.replace("ID", id + "");
-  //  Member member = new Member();
-    services.clear();
-    Bill tempBill = null;
-    int count = 0;
-    int count2 = 0;
-    try {
-      BufferedReader br = new BufferedReader(new FileReader(file_name));
-      String strLine;
-      //Read File Line By Line
-      while ((strLine = br.readLine()) != null) {
-        // Print the content on the console
-        if (count == 0) {
-          setName(strLine);
-          count++;
-        } else if (count == 1) {
-          try { // the String to int conversion happens here
-            int i = Integer.parseInt(strLine.trim());
-            setID(i);
-          } catch (NumberFormatException nfe) {
-            System.out.println("NumberFormatException: " + nfe.getMessage());
-          }
-          count++;
-        } else if (count == 2) {
-          setStreetAddress(strLine);
-          count++;
-        } else if (count == 3) {
-          setCity(strLine);
-          count++;
-        } else if (count == 4) {
-          setState(strLine);
-          count++;
-        } else if (count == 5) {
-          try {
-            // the String to int conversion happens here
-            int i = Integer.parseInt(strLine.trim());
-            setZipCode(i);
-          } catch (NumberFormatException nfe) {
-            System.out.println("NumberFormatException: " + nfe.getMessage());
-          }
-          count++;
-        } else if (count == 6) {
-          try { // the String to int conversion happens here
-            int i = Integer.parseInt(strLine.trim());
-            setStatus(i);
-          } catch (NumberFormatException nfe) {
-            System.out.println("NumberFormatException: " + nfe.getMessage());
-          }
-          count++;
-        } else if (count > 6) {
-          if (count2 == 0) {
-            tempBill = new Bill();
-            tempBill.setDateCreated(strLine);
-            count2++;
-          } else if (count2 == 1) {
-            tempBill.setDateServiceProvided(strLine);
-            count2++;
-          } else if (count2 == 2) {
+    //  Member member = new Member();
+    File f = new File(file_name);
+    if(!f.exists()) {
+      System.out.println("No such member.");
+    }
+    else {
+      services.clear();
+      Bill tempBill = null;
+      int count = 0;
+      int count2 = 0;
+      try {
+        BufferedReader br = new BufferedReader(new FileReader(file_name));
+        String strLine;
+        //Read File Line By Line
+        while ((strLine = br.readLine()) != null) {
+          // Print the content on the console
+          if (count == 0) {
+            setName(strLine);
+            count++;
+          } else if (count == 1) {
             try { // the String to int conversion happens here
               int i = Integer.parseInt(strLine.trim());
-              tempBill.setProviderID(i);
-              count2++;
+              setID(i);
             } catch (NumberFormatException nfe) {
               System.out.println("NumberFormatException: " + nfe.getMessage());
             }
-          } else if (count2 == 3) {
-            try { // the String to int conversion happens here
+            count++;
+          } else if (count == 2) {
+            setStreetAddress(strLine);
+            count++;
+          } else if (count == 3) {
+            setCity(strLine);
+            count++;
+          } else if (count == 4) {
+            setState(strLine);
+            count++;
+          } else if (count == 5) {
+            try {
+              // the String to int conversion happens here
               int i = Integer.parseInt(strLine.trim());
-              tempBill.setMemberID(i);
-              count2++;
+              setZipCode(i);
             } catch (NumberFormatException nfe) {
               System.out.println("NumberFormatException: " + nfe.getMessage());
             }
-          } else if (count2 == 4) {
+            count++;
+          } else if (count == 6) {
             try { // the String to int conversion happens here
               int i = Integer.parseInt(strLine.trim());
-              tempBill.setServiceCode(i);
-              count2++;
+              setStatus(i);
             } catch (NumberFormatException nfe) {
               System.out.println("NumberFormatException: " + nfe.getMessage());
             }
-          } else if (count2 == 5) {
-            tempBill.setComments(strLine);
-            services.add(tempBill);
-            count2 = 0;
+            count++;
+          } else if (count > 6) {
+            if (count2 == 0) {
+              tempBill = new Bill();
+              tempBill.setDateCreated(strLine);
+              count2++;
+            } else if (count2 == 1) {
+              tempBill.setDateServiceProvided(strLine);
+              count2++;
+            } else if (count2 == 2) {
+              try { // the String to int conversion happens here
+                int i = Integer.parseInt(strLine.trim());
+                tempBill.setProviderID(i);
+                count2++;
+              } catch (NumberFormatException nfe) {
+                System.out.println("NumberFormatException: " + nfe.getMessage());
+              }
+            } else if (count2 == 3) {
+              try { // the String to int conversion happens here
+                int i = Integer.parseInt(strLine.trim());
+                tempBill.setMemberID(i);
+                count2++;
+              } catch (NumberFormatException nfe) {
+                System.out.println("NumberFormatException: " + nfe.getMessage());
+              }
+            } else if (count2 == 4) {
+              try { // the String to int conversion happens here
+                int i = Integer.parseInt(strLine.trim());
+                tempBill.setServiceCode(i);
+                count2++;
+              } catch (NumberFormatException nfe) {
+                System.out.println("NumberFormatException: " + nfe.getMessage());
+              }
+            } else if (count2 == 5) {
+              tempBill.setComments(strLine);
+              services.add(tempBill);
+              count2 = 0;
+            }
           }
         }
+        
+        //Close the input stream
+        br.close();
+      } catch (Exception e) {//Catch exception if any
+        System.err.println("Error: " + e.getMessage());
       }
-      
-      //Close the input stream
-      br.close();
-    } catch (Exception e) {//Catch exception if any
-      System.err.println("Error: " + e.getMessage());
     }
   }
 

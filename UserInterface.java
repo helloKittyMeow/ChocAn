@@ -61,14 +61,16 @@ public class UserInterface {
   }
   
   public static void displayProviderTerminal() {
-    final int BILL_CHOCAN = 1;
-    final int VIEW_DIRECTORY = 2;
-    final int EXIT = 3;
+	final int VERIFY_MEMBER = 1;
+    final int BILL_CHOCAN = 2;
+    final int VIEW_DIRECTORY = 3;
+    final int EXIT = 4;
     
     int command;
     do {
       System.out.println("\nPROVIDER TERMINAL");
       System.out.println("Enter a number between 1 and " + EXIT + " as explained below:");
+	  System.out.println("  " + VERIFY_MEMBER + " to verify a member");
       System.out.println("  " + BILL_CHOCAN + " to Bill ChocAn");
       System.out.println("  " + VIEW_DIRECTORY + " to View the Provider Directory");
       System.out.println("  " + EXIT + " to Exit");
@@ -76,6 +78,8 @@ public class UserInterface {
       command = getNumber("Enter command: ", 1, EXIT);
       
       switch (command) {
+        case VERIFY_MEMBER:		  ChocAnApplication.verifyMember();
+                                break;
         case BILL_CHOCAN:       Bill b = new Bill();
                                 b.createBill();
                                 Member member = new Member();
@@ -97,9 +101,8 @@ public class UserInterface {
     final int MEMBER_REPORT = 1;
     final int PROVIDER_REPORT = 2;
     final int SUMMARY_REPORT = 3;
-    final int EFT_REPORT = 4;
-    final int COMPUTE_WEEKLY_REPORT = 5;
-    final int EXIT = 6;
+    final int COMPUTE_WEEKLY_REPORT = 4;
+    final int EXIT = 5;
     
     int command;
     do {
@@ -108,8 +111,7 @@ public class UserInterface {
       System.out.println("  " + MEMBER_REPORT + " to create a Member Report");
       System.out.println("  " + PROVIDER_REPORT + " to create a Provider Report");
       System.out.println("  " + SUMMARY_REPORT + " to create a Summary Report");
-      System.out.println("  " + EFT_REPORT + " to create an EFT Report");
-      System.out.println("  " + COMPUTE_WEEKLY_REPORT + " to compute and create a Weekly Report");
+      System.out.println("  " + COMPUTE_WEEKLY_REPORT + " to create and compute a Weekly Report");
       System.out.println("  " + EXIT + " to Exit");
       
       command = getNumber("Enter command: ", 1, EXIT);
@@ -122,9 +124,7 @@ public class UserInterface {
         case PROVIDER_REPORT:   id = getNumber("Enter provider ID: ", 0, 999999999);
                                 ProviderReport.printReport(id);
                                 break;
-        case SUMMARY_REPORT:    SummaryReport.printReport();
-                                break;
-        case EFT_REPORT:        EFTReport.printReport();
+        case SUMMARY_REPORT:    //displayOperatorTerminal();
                                 break;
         case COMPUTE_WEEKLY_REPORT:    ComputeWeeklyReport.compute();
                                         break;
