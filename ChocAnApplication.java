@@ -13,18 +13,12 @@ public class ChocAnApplication {
     int status = member.getStatus();	
 
     if(status == 1) {
-      System.out.println("Valid.");
+      System.out.println("Mebmer is Valid.");
     }
     else if(status == 2) {
       System.out.println("Suspended.");
     }
   }
-  
-/*  
-  public static void initializeApplication() {
-  
-  }
-*/
 
   public static String getToken(String prompt) {
     while (true) {

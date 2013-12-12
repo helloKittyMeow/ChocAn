@@ -111,7 +111,7 @@ public class UserInterface {
       System.out.println("  " + MEMBER_REPORT + " to create a Member Report");
       System.out.println("  " + PROVIDER_REPORT + " to create a Provider Report");
       System.out.println("  " + SUMMARY_REPORT + " to create a Summary Report");
-      System.out.println("  " + COMPUTE_WEEKLY_REPORT + " to create and compute a Weekly Report");
+      System.out.println("  " + COMPUTE_WEEKLY_REPORT + " to compute a Weekly Report");
       System.out.println("  " + EXIT + " to Exit");
       
       command = getNumber("Enter command: ", 1, EXIT);
