@@ -78,4 +78,28 @@ public abstract class Person {
   public void setZipCode(int zipCode){
     this.zipCode = zipCode;
   }
+  
+  //This method returns an ID of a given file
+  public static int getFileID(String fileName){
+    int idLength = 0;
+    int intID = 0;
+     
+    idLength = (fileName.length() - 5);
+    System.out.println("ID length: " + idLength);
+    char [] string = new char[idLength];
+    
+    for (int i = 1; i <= idLength; i++)
+      string[i-1] = fileName.charAt(i);
+      
+    String ID = new String(string);
+
+    try {
+      // the String to int conversion happens here
+      intID = Integer.parseInt(ID);
+    }catch (NumberFormatException nfe){
+      System.out.println("NumberFormatException: " + nfe.getMessage());
+    }
+    
+    return intID;
+  }
 }

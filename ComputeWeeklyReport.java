@@ -26,10 +26,10 @@ public class ComputeWeeklyReport {
     try {
       // the String to int conversion happens here
       intID = Integer.parseInt(ID);
-    }
-    catch (NumberFormatException nfe){
+    }catch (NumberFormatException nfe){
       System.out.println("NumberFormatException: " + nfe.getMessage());
     }
+    
     return intID;
   }
   
@@ -46,6 +46,7 @@ public class ComputeWeeklyReport {
             //System.out.println(file.getName());
             if(file.getName().startsWith("m")){
               id = getFileID(file.getName());
+              ProviderReport.printReport(id);
               memberCount++;
             }
             if(file.getName().startsWith("p"))
