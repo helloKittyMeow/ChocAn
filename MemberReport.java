@@ -21,6 +21,8 @@ public class MemberReport {
     //  Date date = new Date();
     //  System.out.println(dateFormat.format(date));
     //  outFile = new File("./MemberReports/" + member.getName() + " " + dateFormat.format(date) + ".txt");
+      File directory = new File("MemberReports");
+      directory.mkdirs();
       outFile = new File("./MemberReports/" + member.getName() + " " + (new SimpleDateFormat("MM.dd.yyyy-HH.mm.ss").format(Calendar.getInstance().getTime())) + ".txt");
       outFile.createNewFile();
       outStream = new FileOutputStream(outFile);
@@ -38,7 +40,11 @@ public class MemberReport {
       while (services.hasNext()) {
         Bill service = (Bill)(services.next());
         pStream.println("Date Service Provided: " + service.getDateServiceProvided()); 
-        pStream.println("Provider ID: " + service.getProviderID()); 
+    //    pStream.println("Provider ID: " + service.getProviderID());
+        Provider p = new Provider();
+        p.load(service.getProviderID());
+        pStream.println("Provider Name: " + p.getName());
+        pStream.println("Service Name: " + service.getName());
         pStream.println();
         //might need to find name via service id number in provider directory or something
   //      pStream.print(service.getServiceName() + "\n"); 

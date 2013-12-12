@@ -39,17 +39,16 @@ public class ProviderReport {
       Iterator services = provider.getServices();
       while (services.hasNext()) {
         Bill service = (Bill)(services.next());
-        pStream.println("Date Created: " + service.getDateCreated()); 
-        pStream.println("Date Service Provided: " + service.getDateServiceProvided()); 
+        pStream.println("Date Service Provided: " + service.getDateServiceProvided());
+        pStream.println("Date Bill Submitted: " + service.getDateCreated());
         
         member.load(service.getMemberID());
-    
-        pStream.println("Member Name: " + member.getName()); 
-        pStream.println("Member ID: " + member.getID()); 
-    
+        pStream.println("Member Name: " + member.getName());
+        pStream.println("Member ID: " + member.getID());
+        pStream.println("Service Code: " + service.getCode());
         tempFee = ProviderDirectory.getServiceFee(service.getServiceCode());
-    
-        pStream.println("Fee For Service: " + tempFee); 
+        pStream.println("Fee For Service: " + tempFee);
+        pStream.println();
         membersConsulted += 1;
         feeTotal += tempFee;
       }
