@@ -6,56 +6,63 @@ import java.text.SimpleDateFormat;
 
 public class ProviderReport {
   
-  public static void printReport(int id) {
-    
-    Provider provider = new Provider();
-    Member member = new Member();
-    
-    FileOutputStream outStream = null;
-    PrintStream pStream = null;
-    
-    double feeTotal = 0;
-    int membersConsulted = 0;
-    File outFile;
-    double tempFee = 0;
+  static Provider provider = new Provider();
+  static Member member = new Member();
   
+  static FileOutputStream outStream = null;
+  static PrintStream pStream = null;
+  int i;
+  char c;
+  static double feeTotal = 0;
+  static int membersConsulted = 0;
+  static File outFile;
+  static double tempFee = 0;
+  
+  public static void printReport(int id) {
     try {
       provider.load(id);
-      DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+      DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");//exclude hhmmss?
       Date date = new Date();
       System.out.println(dateFormat.format(date));
-      outFile = new File("./ProviderReports/" + provider.getName() + " " + dateFormat.format(date) + ".txt");
+      outFile = new File("./ProviderReports/" + provider.getName() + "_" + date + ".txt");
+
+      if (outFile.exists()) {
+        outFile.delete();
+      } else {
+        outFile.createNewFile();
+      }
+      
       outStream = new FileOutputStream(outFile);
       pStream = new PrintStream(outStream);
       
       /* Message to print to file */
-      pStream.println("Provider Name: " + provider.getName());
-      pStream.println("Provider ID: " + provider.getID());
-      pStream.println("Address: " + provider.getStreetAddress());
-      pStream.println("City: " + provider.getCity());
-      pStream.println("State: " + provider.getState());
-      pStream.println("Zip: " + provider.getZipCode());
+      pStream.print(provider.getName() + "\n");
+      pStream.print(provider.getID() + "\n");
+      pStream.print(provider.getStreetAddress() + "\n");
+      pStream.print(provider.getCity() + "\n");
+      pStream.print(provider.getState() + "\n");
+      pStream.print(provider.getZipCode() + "\n");
       
       Iterator services = provider.getServices();
       while (services.hasNext()) {
         Bill service = (Bill)(services.next());
-        pStream.println("Date Created: " + service.getDateCreated()); 
-        pStream.println("Date Service Provided: " + service.getDateServiceProvided()); 
+        pStream.print(service.getDateCreated() + "\n"); 
+        pStream.print(service.getDateServiceProvided() + "\n"); 
         
         member.load(service.getMemberID());
     
-        pStream.println("Member Name: " + member.getName()); 
-        pStream.println("Member ID: " + member.getID()); 
+        pStream.print(member.getName() + "\n"); 
+        pStream.print(member.getID() + "\n"); 
     
         tempFee = ProviderDirectory.getServiceFee(service.getServiceCode());
     
-        pStream.println("Fee For Service: " + tempFee); 
+        pStream.print(tempFee + "\n"); 
         membersConsulted += 1;
         feeTotal += tempFee;
       }
       
-      pStream.println("Members Consulted: " + membersConsulted); 
-      pStream.println("Fee Total: " + feeTotal); 
+      pStream.print(membersConsulted + "\n"); 
+      pStream.print(feeTotal + "\n"); 
       
       pStream.close();
       

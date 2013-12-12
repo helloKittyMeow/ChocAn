@@ -6,27 +6,32 @@ import java.text.SimpleDateFormat;
 
 public class EFTReport {
 
+  static Provider provider = new Provider();
+  
+  static FileOutputStream outStream = null;
+  static PrintStream pStream = null;
+  static File outFile;
+  
+  static double providerFeeTotal;
+  static double tempFee;
   
   public static void printReport() {
-  
-    Provider provider = new Provider();
-  
-    FileOutputStream outStream = null;
-    PrintStream pStream = null;
-    File outFile;
-  
-    double providerFeeTotal;
-    double tempFee;
-  
     try {
-      DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+      DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");//exclude hhmmss?
       Date date = new Date();
       System.out.println(dateFormat.format(date));
-      outFile = new File("./EFTReports/" + "EFT" + " " + dateFormat.format(date) + ".txt");
+      outFile = new File("./EFTReports/" + "Summary" + "_" + date + ".txt");
+
+      if (outFile.exists()) {
+        outFile.delete();
+      } else {
+        outFile.createNewFile();
+      }
+        
       outStream = new FileOutputStream(outFile);
       pStream = new PrintStream(outStream);
       
-      File folder = new File("./");
+      File folder = new File("/Users/you/folder/");
       File[] listOfFiles = folder.listFiles();
 
       for (File file : listOfFiles) {
@@ -38,8 +43,8 @@ public class EFTReport {
           
           //check if any services exist
           if (services.hasNext()) {
-            pStream.println("Provider Name: " + provider.getName()); 
-            pStream.println("Provider ID: " + provider.getID()); 
+            pStream.print(provider.getName() + "\n"); 
+            pStream.print(provider.getID() + "\n"); 
           }
           
           while (services.hasNext()) {
@@ -48,8 +53,7 @@ public class EFTReport {
             providerFeeTotal += tempFee;
           }
           
-          pStream.println("Provider Fee Total: " + providerFeeTotal);
-          pStream.println();
+          pStream.print(providerFeeTotal + "\n\n");
         }
       }
       
