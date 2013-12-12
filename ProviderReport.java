@@ -54,14 +54,14 @@ public class ProviderReport {
         pStream.println("Member ID: " + member.getID());
         pStream.println("Service Code: " + service.getServiceCode());
         tempFee = ProviderDirectory.getServiceFee(service.getServiceCode());
-        pStream.println("Fee For Service: $" + tempFee);
+        pStream.println("Fee For Service: $" + String.format("%.2f", tempFee));
         pStream.println();
         membersConsulted += 1;
         feeTotal += tempFee;
       }
       
-      pStream.println("Members Consulted: " + membersConsulted); 
-      pStream.println("Fee Total: $" + feeTotal); 
+      pStream.println("Members Consulted: " + membersConsulted);
+      pStream.println("Fee Total: $" + String.format("%.2f", feeTotal));
       pStream.println();
       
       pStream.close();

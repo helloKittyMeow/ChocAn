@@ -5,8 +5,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 
 public class SummaryReport {
-
-  
+  private static final String directoryName = "SummaryReports";
   
   public static void printReport() {
   
@@ -24,10 +23,12 @@ public class SummaryReport {
     File outFile = null;
     
     try {
+      File directory = new File(directoryName);
+      directory.mkdirs();
       DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
       Date date = new Date();
-      System.out.println(dateFormat.format(date));
-      outFile = new File("./SummaryReports/" + "Summary" + " " + dateFormat.format(date) + ".txt");
+  //    System.out.println(dateFormat.format(date));
+      outFile = new File("./" + directoryName + "/" + "Summary" + " " + dateFormat.format(date) + ".txt");
       outStream = new FileOutputStream(outFile);
       pStream = new PrintStream(outStream);
       
@@ -71,7 +72,7 @@ public class SummaryReport {
       pStream.println("Total Fee: " + feeTotal); 
       
       pStream.close();
-      
+      System.out.println("\nSaved Summary Report");
     } catch (Exception e) {
       System.out.print(e);
     }

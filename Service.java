@@ -41,6 +41,6 @@ public class Service {
   }
   
   public String toString() {
-    return "Name: " + name + "\nCode: " + code + "\nFee: $" + fee + "\n";
+    return "Name: " + name + "\nCode: " + code + "\nFee: $" + String.format("%.2f", fee) + "\n";
   }
 }
