@@ -20,7 +20,7 @@ public class ChocAnApplication {
     }
   }
 
-  public static String getToken(String prompt) {
+  private static String getToken(String prompt) {
     while (true) {
       try {
         System.out.print(prompt);
@@ -35,7 +35,7 @@ public class ChocAnApplication {
     }
   }
 
-  public static int getNumber(String prompt, int MIN, int MAX) {
+  private static int getNumber(String prompt, int MIN, int MAX) {
     while (true) {
       try {
         String item = getToken(prompt);

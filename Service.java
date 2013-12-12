@@ -41,6 +41,6 @@ public class Service {
   }
   
   public String toString() {
-    return name + "\n" + code + "\n$" + fee + "\n";
+    return "Name: " + name + "\nCode: " + code + "\nFee: $" + fee + "\n";
   }
 }
