@@ -17,10 +17,11 @@ public class MemberReport {
   
     try {
       member.load(id);
-      DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-      Date date = new Date();
-      System.out.println(dateFormat.format(date));
-      outFile = new File("./MemberReports/" + member.getName() + " " + dateFormat.format(date) + ".txt");
+    //  DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+    //  Date date = new Date();
+    //  System.out.println(dateFormat.format(date));
+    //  outFile = new File("./MemberReports/" + member.getName() + " " + dateFormat.format(date) + ".txt");
+      outFile = new File("./MemberReports/" + member.getName() + " " + (new SimpleDateFormat("MM.dd.yyyy-HH.mm.ss").format(Calendar.getInstance().getTime())) + ".txt");
       outFile.createNewFile();
       outStream = new FileOutputStream(outFile);
       pStream = new PrintStream(outStream);
