@@ -47,8 +47,9 @@ public class SummaryReport {
           //check if any services exist
           if (services.hasNext()) {
             providersWithServices++;
-            pStream.println("Provider Name: " + provider.getName()); 
           }
+          pStream.println("Provider Name: " + provider.getName()); 
+          
           
           while (services.hasNext()) {
             Bill service = (Bill)(services.next());
@@ -68,7 +69,7 @@ public class SummaryReport {
       }
       
       pStream.println("Providers With Services: " + providersWithServices); 
-      pStream.println("Total Members Consulted: " + membersConsulted); 
+      pStream.println("Total Consultations: " + membersConsulted); 
       pStream.println("Total Fee: " + String.format("$%.2f", feeTotal)); 
       
       pStream.close();

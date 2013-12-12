@@ -12,27 +12,29 @@ public class ComputeWeeklyReport {
     int id = 0;
     File folder = new File("./");
     File[] listOfFiles = folder.listFiles();
-    File folder2 = new File("./EFTReports");
-    File[] listOfFiles2 = folder2.listFiles();
+  //  File folder2 = new File("./EFTReports");
+  //  File[] listOfFiles2 = folder2.listFiles();
 
     for (File file : listOfFiles) {
         if (file.isFile()) {
-            if(file.getName().startsWith("m")){           
+            if(file.getName().startsWith("m")){
               id = Person.getFileID(file.getName());
-              MemberReport.printReport(id); 
+              MemberReport.printReport(id);
               memberCount++;
             }
             if(file.getName().startsWith("p")){
               id = Person.getFileID(file.getName());
               ProviderReport.printReport(id);
               providerCount++;
-            }           
-            EFTReport.printReport();
+            }
         }
-    } 
-    System.out.println(memberCount + " members in the directory.");
-    System.out.println(providerCount + " providers in the directory.");
-    System.out.println("Provider Fee Total: " + providerFeeTotal);
+    }
+    EFTReport.printReport();
+  //  System.out.println(memberCount + " members in the directory.");
+  //  System.out.println(providerCount + " providers in the directory.");
+  //  System.out.println("Provider Fee Total: " + providerFeeTotal);
+    System.out.println("\n" + memberCount + " member reports generated.");
+    System.out.println(providerCount + " provider reports generated.");
   }
 }
 

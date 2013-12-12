@@ -42,16 +42,16 @@ public class EFTReport {
           if (services.hasNext()) {
             pStream.println("Provider Name: " + provider.getName()); 
             pStream.println("Provider ID: " + provider.getID()); 
-          }
           
-          while (services.hasNext()) {
-            Bill service = (Bill)(services.next());
-            tempFee = ProviderDirectory.getServiceFee(service.getServiceCode());
-            providerFeeTotal += tempFee;
+            while (services.hasNext()) {
+              Bill service = (Bill)(services.next());
+              tempFee = ProviderDirectory.getServiceFee(service.getServiceCode());
+              providerFeeTotal += tempFee;
+            }
+            
+            pStream.println("Provider Fee Total: " + String.format("$%.2f", providerFeeTotal));
+            pStream.println();
           }
-          
-          pStream.println("Provider Fee Total: " + String.format("$%.2f", providerFeeTotal));
-          pStream.println();
         }
       }
       
