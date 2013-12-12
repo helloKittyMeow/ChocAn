@@ -85,7 +85,6 @@ public abstract class Person {
     int intID = 0;
      
     idLength = (fileName.length() - 5);
-    System.out.println("ID length: " + idLength);
     char [] string = new char[idLength];
     
     for (int i = 1; i <= idLength; i++)
