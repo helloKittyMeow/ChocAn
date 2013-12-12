@@ -12,7 +12,7 @@ public class ComputeWeeklyReport {
     int providerCount = 0;
     int totalFee = 0;
     int id = 0;
-    File folder = new File("./");
+    File folder = new File("X:/Desktop/ChocAn");
     File[] listOfFiles = folder.listFiles();
 
     for (File file : listOfFiles) {

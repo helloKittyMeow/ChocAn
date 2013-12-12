@@ -6,32 +6,27 @@ import java.text.SimpleDateFormat;
 
 public class EFTReport {
 
-  static Provider provider = new Provider();
-  
-  static FileOutputStream outStream = null;
-  static PrintStream pStream = null;
-  static File outFile;
-  
-  static double providerFeeTotal;
-  static double tempFee;
   
   public static void printReport() {
+  
+    Provider provider = new Provider();
+  
+    FileOutputStream outStream = null;
+    PrintStream pStream = null;
+    File outFile;
+  
+    double providerFeeTotal;
+    double tempFee;
+  
     try {
-      DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");//exclude hhmmss?
+      DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
       Date date = new Date();
       System.out.println(dateFormat.format(date));
-      outFile = new File("./EFTReports/" + "Summary" + "_" + date + ".txt");
-
-      if (outFile.exists()) {
-        outFile.delete();
-      } else {
-        outFile.createNewFile();
-      }
-        
+      outFile = new File("./EFTReports/" + "EFT" + " " + dateFormat.format(date) + ".txt");
       outStream = new FileOutputStream(outFile);
       pStream = new PrintStream(outStream);
       
-      File folder = new File("/Users/you/folder/");
+      File folder = new File("./");
       File[] listOfFiles = folder.listFiles();
 
       for (File file : listOfFiles) {
@@ -43,8 +38,8 @@ public class EFTReport {
           
           //check if any services exist
           if (services.hasNext()) {
-            pStream.print(provider.getName() + "\n"); 
-            pStream.print(provider.getID() + "\n"); 
+            pStream.println("Provider Name: " + provider.getName()); 
+            pStream.println("Provider ID: " + provider.getID()); 
           }
           
           while (services.hasNext()) {
@@ -53,7 +48,8 @@ public class EFTReport {
             providerFeeTotal += tempFee;
           }
           
-          pStream.print(providerFeeTotal + "\n\n");
+          pStream.println("Provider Fee Total: " + providerFeeTotal);
+          pStream.println();
         }
       }
       
