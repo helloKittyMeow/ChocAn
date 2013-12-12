@@ -4,7 +4,7 @@ import java.io.*;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 
-public class SummaryReport {
+public class EFTReport {
 
   Provider provider = new Provider();
 
