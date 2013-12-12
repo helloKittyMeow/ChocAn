@@ -16,7 +16,7 @@ public class SummaryReport {
   
     int providerConsultations = 0;
     double providerFeeTotal = 0;
-    double tempFee = 0;  
+    double tempFee = 0;
     
     FileOutputStream outStream = null;
     PrintStream pStream = null;
@@ -36,6 +36,9 @@ public class SummaryReport {
       File[] listOfFiles = folder.listFiles();
 
       for (File file : listOfFiles) {
+        providerConsultations = 0;
+        providerFeeTotal = 0;
+        tempFee = 0;
         
         if (file.isFile() && file.getName().startsWith("p")) {
           provider.load(Person.getFileID(file.getName()));
@@ -62,9 +65,6 @@ public class SummaryReport {
         
         membersConsulted += providerConsultations;
         feeTotal += providerFeeTotal;
-        providerConsultations = 0;
-        providerFeeTotal = 0;
-        tempFee = 0;
       }
       
       pStream.println("Providers With Services: " + providersWithServices); 

@@ -13,7 +13,7 @@ public class ChocAnApplication {
     int status = member.getStatus();	
 
     if(status == 1) {
-      System.out.println("Mebmer is Valid.");
+      System.out.println("Member is Valid.");
     }
     else if(status == 2) {
       System.out.println("Suspended.");
@@ -50,7 +50,6 @@ public class ChocAnApplication {
   }
   
   public static void main(String[] args) {
-  //  UserInterface userInterface = new UserInterface();
     UserInterface.displayMainMenu();
   }
 }

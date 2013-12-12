@@ -81,6 +81,7 @@ public class Provider extends Person {
   //This method reads provider file.
   public void load(int id) {
   //  String file_name = id + ".txt";
+    services.clear();
     String file_name = providerFileName.replace("ID", id + "");
     Provider provider = new Provider();
     Bill tempBill = null; 

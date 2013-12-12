@@ -4,9 +4,3 @@ Hue st s
 st cloud
 mn
 45678
-some date
-another date
-777
-7
-845
-*********
