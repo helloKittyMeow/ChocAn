@@ -17,21 +17,21 @@ public class ManagePerson {
         System.exit(0);
       }
     }
-	}
+  }
   
   private static int getNumber(String prompt, int MIN, int MAX) {
-		while (true) {
-		  try {
+    while (true) {
+      try {
         String item = getToken(prompt);
         Integer num = Integer.valueOf(item);
         if ((num.intValue() >= MIN) && (num.intValue() <= MAX)) {
           return num.intValue();
         }
-		  } catch (NumberFormatException nfe) {
+      } catch (NumberFormatException nfe) {
         System.out.println("Please input a number ");
-		  }
-		}
-	}
+      }
+    }
+  }
 
   public static void manageMember() { 
     final int ADD_MEMBER = 1;
@@ -43,34 +43,34 @@ public class ManagePerson {
     
     int command;
     do {
-      System.out.println("\nMEMBER MANAGEMENT TERMINAL");
-      System.out.println("Enter a number between 1 and 6 as explained below:");
+      System.out.println("\nMEMBER MANAGEMENT MENU");
+      System.out.println("Enter a number between 1 and " + EXIT + " as explained below:");
       System.out.println("  " + ADD_MEMBER + " to add a member");
       System.out.println("  " + REMOVE_MEMBER + " to remove a member");
       System.out.println("  " + ACTIVATE_MEMBER + " to activate a member");
       System.out.println("  " + SUSPEND_MEMBER + " to suspend a member");
       System.out.println("  " + PRINT_MEMBER_INFO + " to see a member info");
-      System.out.println("  " + EXIT + " to exit");
+      System.out.println("  " + EXIT + " to return to the Operator Terminal");
       
-      command = getNumber("Enter command: ", 1, EXIT);  
+      command = getNumber("Enter command: ", 1, EXIT);
       Member m = new Member();
       
       switch (command) {
-        case ADD_MEMBER:		    m.addMember();
+        case ADD_MEMBER:        m.addMember();
                                 break;
-        case REMOVE_MEMBER:		  m.removeMember(getPersonID());
+        case REMOVE_MEMBER:     m.removeMember(getPersonID());
                                 break;
-        case ACTIVATE_MEMBER:		m.load(getPersonID());
-                                m.setStatus(1);
+        case ACTIVATE_MEMBER:   m.load(getPersonID());
+                                m.setStatus(Member.ACTIVE);
                                 System.out.println(m.toString());
                                 m.save();
                                 break;
-        case SUSPEND_MEMBER:		m.load(getPersonID());
-                                m.setStatus(2);
+        case SUSPEND_MEMBER:    m.load(getPersonID());
+                                m.setStatus(Member.SUSPENDED);
                                 System.out.println(m.toString());
                                 m.save();
                                 break;
-        case PRINT_MEMBER_INFO:	m.load(getPersonID());
+        case PRINT_MEMBER_INFO: m.load(getPersonID());
                                 System.out.println(m.toString());
                                 break;
       }
@@ -85,32 +85,31 @@ public class ManagePerson {
     
     int command;
     do {
-      System.out.println("\nPROVIDER MANAGEMENT TERMINAL");
-      System.out.println("Enter a number between 1 and 4 as explained below:");
+      System.out.println("\nPROVIDER MANAGEMENT MENU");
+      System.out.println("Enter a number between 1 and " + EXIT + " as explained below:");
       System.out.println("  " + ADD_PROVIDER + " to add a provider");
       System.out.println("  " + REMOVE_PROVIDER + " to remove a provider");
       System.out.println("  " + PRINT_PROVIDER_INFO + " to see a provider info");
-      System.out.println("  " + EXIT + " to exit");
+      System.out.println("  " + EXIT + " to return to the Operator Terminal");
       
       command = getNumber("Enter command: ", 1, EXIT);
       Provider p = new Provider();
       
       switch (command) {
-        case ADD_PROVIDER:		p.addProvider();
-                              break;
-        case REMOVE_PROVIDER: p.removeProvider(getPersonID());
-                              break;
-        case PRINT_PROVIDER_INFO:	p.load(getPersonID());
-                                System.out.println(p.toString());
-                                break;
-                           
+        case ADD_PROVIDER:          p.addProvider();
+                                    break;
+        case REMOVE_PROVIDER:       p.removeProvider(getPersonID());
+                                    break;
+        case PRINT_PROVIDER_INFO:   p.load(getPersonID());
+                                    System.out.println(p.toString());
+                                    break;
       }
     } while (command != EXIT);  
   }
   
-  public static int getPersonID() {
+  private static int getPersonID() {
     int ID = 0;
-    ID = getNumber("Enter the ID: ", 1, 999999);
+    ID = getNumber("Enter the ID: ", 0, 999999999);
     return ID;
   }
 

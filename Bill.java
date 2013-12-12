@@ -1,8 +1,9 @@
 import java.util.*;
 import java.io.*;
+import java.text.SimpleDateFormat;
 
 public class Bill{
-	private BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+  private BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
   private String dateCreated;
   private String dateServiceProvided;
   private int providerID;
@@ -10,7 +11,7 @@ public class Bill{
   private int serviceCode;
   private String comments;
   
-    public Bill () {
+  public Bill () {
     this.dateCreated = null;
     this.dateServiceProvided = null;
     this.providerID = 0;
@@ -19,8 +20,9 @@ public class Bill{
     this.comments = null;
   }
   
-  public Bill (String dateCreated, String dateServiceProvided, int providerID, int memberID, int serviceCode, String comments) {
-    this.dateCreated = dateCreated;
+  public Bill(String dateServiceProvided, int providerID, int memberID, int serviceCode, String comments) {
+  //  this.dateCreated = dateCreated;
+    this.dateCreated = new SimpleDateFormat("MM-dd-yyyy").format(Calendar.getInstance().getTime());
     this.dateServiceProvided = dateServiceProvided;
     this.providerID = providerID;
     this.memberID = memberID;
@@ -29,9 +31,10 @@ public class Bill{
   }
   
   public void createBill(){
-  	dateCreated = getToken("Enter the date that service was created: ");
+  //  dateCreated = getToken("Enter the date that service was created: ");
+    dateCreated = new SimpleDateFormat("MM-dd-yyyy").format(Calendar.getInstance().getTime());
     dateServiceProvided = getToken("Enter the date that service was provided: ");
-		providerID = getNumber("Enter the provider id: ");
+    providerID = getNumber("Enter the provider id: ");
     memberID = getNumber("Enter the member id: ");
     serviceCode = getNumber("Enter the service code: ");
     comments = getToken("Enter comments: ");
@@ -74,7 +77,7 @@ public class Bill{
     this.comments = comments;
   } 
   
-  public String getToken(String prompt) {
+  private String getToken(String prompt) {
     do {
       try {
         System.out.println(prompt);
@@ -87,9 +90,9 @@ public class Bill{
           System.exit(0);
       }
     } while (true);
-	}
-	
-	public int getNumber(String prompt) {
+  }
+  
+  private int getNumber(String prompt) {
     do {
       try {
         String item = getToken(prompt);
@@ -99,8 +102,12 @@ public class Bill{
         System.out.println("Please input a number ");
       }
     } while (true);
-	}
-
+  }
+  
+  public String toString() {
+    return  dateCreated + "\n" + dateServiceProvided + "\n" + providerID + "\n"
+            + memberID + "\n" + serviceCode + "\n" + comments + "\n";
+  }
 }
 
 
