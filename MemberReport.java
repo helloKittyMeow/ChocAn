@@ -6,15 +6,16 @@ import java.text.SimpleDateFormat;
 
 public class MemberReport {
   
-  public static void printReport(int id) {
-    Member member = new Member();
+  static Member member = new Member();
   
-    FileOutputStream outStream = null;
-    PrintStream pStream = null;
-    int i;
-    char c;
+  static FileOutputStream outStream = null;
+  static PrintStream pStream = null;
+  int i;
+  char c;
     
-    File outFile;
+  static File outFile;
+  
+  public static void printReport(int id) {
     
     try {
       member.load(id);

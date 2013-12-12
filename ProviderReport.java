@@ -6,17 +6,19 @@ import java.text.SimpleDateFormat;
 
 public class ProviderReport {
   
-  public static void printReport(int id) {
-    Provider provider = new Provider();
+  static Provider provider = new Provider();
+  static Member member = new Member();
   
-    FileOutputStream outStream = null;
-    PrintStream pStream = null;
-    int i;
-    char c;
-    double feeTotal = 0;
-    int membersConsulted = 0;
-    File outFile;
-    
+  static FileOutputStream outStream = null;
+  static PrintStream pStream = null;
+  int i;
+  char c;
+  static double feeTotal = 0;
+  static int membersConsulted = 0;
+  static File outFile;
+  static double tempFee = 0;
+  
+  public static void printReport(int id) {
     try {
       provider.load(id);
       DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");//exclude hhmmss?
@@ -46,12 +48,17 @@ public class ProviderReport {
         Bill service = (Bill)(services.next());
         pStream.print(service.getDateCreated() + "\n"); 
         pStream.print(service.getDateServiceProvided() + "\n"); 
-    //    pStream.print(service.getMemberName() + "\n"); 
-        pStream.print(service.getMemberID() + "\n"); 
-        pStream.print(service.getServiceCode() + "\n"); 
-    //    pStream.print(service.getFee() + "\n"); 
+        
+        member.load(service.getMemberID());
+    
+        pStream.print(member.getName() + "\n"); 
+        pStream.print(member.getID() + "\n"); 
+    
+        tempFee = ProviderDirectory.getServiceFee(service.getServiceCode());
+    
+        pStream.print(tempFee + "\n"); 
         membersConsulted += 1;
-    //    feeTotal += service.getFee();
+        feeTotal += tempFee;
       }
       
       pStream.print(membersConsulted + "\n"); 
