@@ -8,7 +8,6 @@ public class SummaryReport {
 
   Provider provider = new Provider();
   Member member = new Member();
-  Service service = new Service();
   
   FileOutputStream outStream = null;
   PrintStream pStream = null;
@@ -17,8 +16,9 @@ public class SummaryReport {
   int membersConsulted = 0;
   double feeTotal = 0;
   File outFile;
+  double tempFee = 0;
   
-  public static void printReport(int id) {
+  public void printReport(int id) {
     try {
       provider.load(id);
       DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");//exclude hhmmss?
@@ -45,21 +45,22 @@ public class SummaryReport {
 
       Iterator services = provider.getServices();
       while (services.hasNext()) {
-        Service service = (Service)(services.next());
-        pStream.print(service.getDateCreated() + "\n"); 
-        pStream.print(service.getDateServiceProvided() + "\n");
+        Bill bill = (Bill)(services.next());
+        pStream.print(bill.getDateCreated() + "\n"); 
+        pStream.print(bill.getDateServiceProvided() + "\n");
         
-        member.load(provider.getMemberID());
+        member.load(provider.getID());
         
         pStream.print(member.getName() + "\n"); 
         pStream.print(member.getID() + "\n"); 
-        pStream.print(service.getCode() + "\n"); 
+        pStream.print(bill.getServiceCode() + "\n"); 
         
-        service.load(provider.getID());
+        //load service then get fee associated with it.
+        tempFee = ProviderDirectory.getServiceFee(provider.getID());
         
-        pStream.print(service.getFee() + "\n"); 
+        pStream.print(tempFee + "\n"); 
         membersConsulted += 1;
-        feeTotal += service.getFee();
+        feeTotal += tempFee;
       }
 
       pStream.print(membersConsulted + "\n"); 
