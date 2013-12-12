@@ -21,6 +21,15 @@ public class Member extends Person {
   public int getStatus() {
     return active;
   }
+  
+  public String getStatusString() {
+    switch(active) {
+      case ACTIVE:    return "Validated";
+      case SUSPENDED: return "Suspended";
+      default:        System.out.println("Error in getStatusString method of Member class");
+    }
+    return "";
+  }
 
   //This method sets the status of a member
   public void setStatus(int active) {
@@ -260,26 +269,26 @@ public class Member extends Person {
   }
   
   public String toString() {
-    String string = "Member name: " + getName() + "\nid: " + getID()
-                    + "\naddress: " + getStreetAddress() + "\ncity: "
-                    + getCity() + "\nstate: " + getState() + "\nzipCode: "
-                    + getZipCode() + "\nstatus: " + getStatus();
-    string += "\nBILLS: [";
-  //  string += "\nBILLS:";
+    String string = "\nMember name: " + getName() + "\nMember ID: " + getID()
+                    + "\nStreet Address: " + getStreetAddress() + "\nCity: " + getCity()
+                    + "\nState: " + getState() + "\nZIP Code: " + getZipCode()
+                    + "\nStatus: " + getStatusString();
+  //  string += "\nBILLS: [";
+    string += "\n\nBILLS:\n";
     for (Iterator iterator = services.iterator(); iterator.hasNext(); ) {
   //    System.out.println("found a bill");
       Bill bill = (Bill) iterator.next();
-  //    string += bill;
-      
+      string += bill + "\n";
+  /*    
       string += " " + bill.getDateCreated();
       string += " " + bill.getDateServiceProvided();
       string += " " + bill.getProviderID();
       string += " " + bill.getMemberID();
       string += " " + bill.getServiceCode();
       string += " " + bill.getComments() + "\n";
-      
+  */
     }
-    string += "]";
+  //  string += "]";
     return string;
   }
 }

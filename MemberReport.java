@@ -5,11 +5,12 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 
 public class MemberReport {
-  
+  private static final String directoryName = "MemberReports";
   
   public static void printReport(int id) {
   
     Member member = new Member();
+    Provider provider = new Provider();
   
     FileOutputStream outStream = null;
     PrintStream pStream = null;
@@ -21,9 +22,11 @@ public class MemberReport {
     //  Date date = new Date();
     //  System.out.println(dateFormat.format(date));
     //  outFile = new File("./MemberReports/" + member.getName() + " " + dateFormat.format(date) + ".txt");
-      File directory = new File("MemberReports");
+      File directory = new File(directoryName);
       directory.mkdirs();
-      outFile = new File("./MemberReports/" + member.getName() + " " + (new SimpleDateFormat("MM.dd.yyyy-HH.mm.ss").format(Calendar.getInstance().getTime())) + ".txt");
+      String fileName = member.getName() + " " + (new SimpleDateFormat("MM.dd.yyyy-HH.mm.ss").format(Calendar.getInstance().getTime())) + ".txt";
+      
+      outFile = new File("./" + directoryName + "/" + fileName);
       outFile.createNewFile();
       outStream = new FileOutputStream(outFile);
       pStream = new PrintStream(outStream);
@@ -41,16 +44,16 @@ public class MemberReport {
         Bill service = (Bill)(services.next());
         pStream.println("Date Service Provided: " + service.getDateServiceProvided()); 
     //    pStream.println("Provider ID: " + service.getProviderID());
-        Provider p = new Provider();
-        p.load(service.getProviderID());
-        pStream.println("Provider Name: " + p.getName());
-        pStream.println("Service Name: " + service.getName());
+        provider.load(service.getProviderID());
+        pStream.println("Provider Name: " + provider.getName());
+        pStream.println("Service Name: " + ProviderDirectory.getServiceName(service.getServiceCode()));
         pStream.println();
         //might need to find name via service id number in provider directory or something
   //      pStream.print(service.getServiceName() + "\n"); 
       }
       
       pStream.close();
+      System.out.println("\nSaved report for Member " + id + " as " + fileName);
       
     } catch (Exception e) {
       System.out.print(e);

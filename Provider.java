@@ -241,6 +241,7 @@ public class Provider extends Person {
   }
   
   public String toString() {
+  /*
     String string = "Provider name: " + getName() + "\nid: " + getID() + "\naddress: " + getStreetAddress() + "\ncity: " + getCity() + "\nstate: " + getState() + "\nzipCode " + getZipCode();
     string += "\nBILLS: [";
     for (Iterator iterator = services.iterator(); iterator.hasNext(); ) {
@@ -253,6 +254,15 @@ public class Provider extends Person {
       string += " " + bill.getComments() + "\n";
     }
     string += "]";
+  */
+    String string = "\nProvider name: " + getName() + "\nProvider ID: " + getID()
+                    + "\nStreet Address: " + getStreetAddress() + "\nCity: " + getCity()
+                    + "\nState: " + getState() + "\nZIP Code: " + getZipCode();
+    string += "\n\nBILLS:\n";
+    for (Iterator iterator = services.iterator(); iterator.hasNext(); ) {
+      Bill bill = (Bill) iterator.next();
+      string += bill + "\n";
+    }
     return string;
   }
 }

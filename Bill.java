@@ -105,8 +105,14 @@ public class Bill{
   }
   
   public String toString() {
-    return  dateCreated + "\n" + dateServiceProvided + "\n" + providerID + "\n"
-            + memberID + "\n" + serviceCode + "\n" + comments + "\n";
+    return  "Date Bill Submitted: " + dateCreated
+            + "\nDate Service Provided: " + dateServiceProvided
+            + "\nProvider ID: " + providerID
+            + "\nMember ID: " + memberID
+            + "\nService Code: " + serviceCode
+            + "\nComments: " + comments + "\n";
+  //  return  dateCreated + "\n" + dateServiceProvided + "\n" + providerID + "\n"
+  //          + memberID + "\n" + serviceCode + "\n" + comments + "\n";
   }
 }
 

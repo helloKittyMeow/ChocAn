@@ -101,8 +101,9 @@ public class UserInterface {
     final int MEMBER_REPORT = 1;
     final int PROVIDER_REPORT = 2;
     final int SUMMARY_REPORT = 3;
-    final int COMPUTE_WEEKLY_REPORT = 4;
-    final int EXIT = 5;
+    final int EFT_REPORT = 4;
+    final int COMPUTE_WEEKLY_REPORT = 5;
+    final int EXIT = 6;
     
     int command;
     do {
@@ -111,23 +112,26 @@ public class UserInterface {
       System.out.println("  " + MEMBER_REPORT + " to create a Member Report");
       System.out.println("  " + PROVIDER_REPORT + " to create a Provider Report");
       System.out.println("  " + SUMMARY_REPORT + " to create a Summary Report");
-      System.out.println("  " + COMPUTE_WEEKLY_REPORT + " to compute a Weekly Report");
+      System.out.println("  " + EFT_REPORT + " to create an EFT Report");
+      System.out.println("  " + COMPUTE_WEEKLY_REPORT + " to create and compute a Weekly Report");
       System.out.println("  " + EXIT + " to Exit");
       
       command = getNumber("Enter command: ", 1, EXIT);
       
       int id;
       switch (command) {
-        case MEMBER_REPORT:     id = getNumber("Enter member ID: ", 0, 999999999);
-                                MemberReport.printReport(id);
-                                break;
-        case PROVIDER_REPORT:   id = getNumber("Enter provider ID: ", 0, 999999999);
-                                ProviderReport.printReport(id);
-                                break;
-        case SUMMARY_REPORT:    //displayOperatorTerminal();
-                                break;
-        case COMPUTE_WEEKLY_REPORT:    ComputeWeeklyReport.compute();
-                                        break;
+        case MEMBER_REPORT:         id = getNumber("Enter member ID: ", 0, 999999999);
+                                    MemberReport.printReport(id);
+                                    break;
+        case PROVIDER_REPORT:       id = getNumber("Enter provider ID: ", 0, 999999999);
+                                    ProviderReport.printReport(id);
+                                    break;
+        case SUMMARY_REPORT:        SummaryReport.printReport();
+                                    break;
+        case EFT_REPORT:            EFTReport.printReport();
+                                    break;
+        case COMPUTE_WEEKLY_REPORT: ComputeWeeklyReport.compute();
+                                    break;
       }
     } while (command != EXIT);
   }
