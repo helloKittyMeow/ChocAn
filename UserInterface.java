@@ -97,7 +97,8 @@ public class UserInterface {
     final int MEMBER_REPORT = 1;
     final int PROVIDER_REPORT = 2;
     final int SUMMARY_REPORT = 3;
-    final int EXIT = 4;
+    final int COMPUTE_WEEKLY_REPORT = 4;
+    final int EXIT = 5;
     
     int command;
     do {
@@ -106,6 +107,7 @@ public class UserInterface {
       System.out.println("  " + MEMBER_REPORT + " to create a Member Report");
       System.out.println("  " + PROVIDER_REPORT + " to create a Provider Report");
       System.out.println("  " + SUMMARY_REPORT + " to create a Summary Report");
+      System.out.println("  " + COMPUTE_WEEKLY_REPORT + " to compute and create a Weekly Report");
       System.out.println("  " + EXIT + " to Exit");
       
       command = getNumber("Enter command: ", 1, EXIT);
@@ -120,6 +122,8 @@ public class UserInterface {
                                 break;
         case SUMMARY_REPORT:    //displayOperatorTerminal();
                                 break;
+        case COMPUTE_WEEKLY_REPORT:    ComputeWeeklyReport.compute();
+                                        break;
       }
     } while (command != EXIT);
   }

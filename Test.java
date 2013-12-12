@@ -1,4 +1,4 @@
-
+import java.util.*;
 
 public class Test{
   public static void main(String[] args){
@@ -6,14 +6,17 @@ public class Test{
     System.out.println("Test prog!");
 
     Member m = new Member();
-    Bill b = new Bill("gg", "bb", 999, 123, 777, "GOOD DAY SIR");
-    Bill a = new Bill("gg", "aa", 999, 123, 777, "GOOD DAY SIR");
+    Bill b = new Bill("bb", 999, 123, 777, "GOOD DAY SIR");
+    Bill a = new Bill("aa", 999, 123, 777, "GOOD DAY SIR");
+    
+    ComputeWeeklyReport.compute();
+    /*
     m.addService(b);
     m.addService(a);
     m.addMember();
     m.load(123);
     
-    
+ 
     System.out.println("In member class: \n");
     System.out.println(m.getName());
     System.out.println(m.getID());
@@ -24,6 +27,6 @@ public class Test{
 
 
     System.out.println( m.toString());
-
+*/
   }
 }
