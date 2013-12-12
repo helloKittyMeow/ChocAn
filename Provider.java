@@ -83,6 +83,7 @@ public class Provider extends Person {
   //  String file_name = id + ".txt";
     String file_name = providerFileName.replace("ID", id + "");
     Provider provider = new Provider();
+    Bill tempBill = null; 
     int count = 0;
     int count2 = 0;
     try {
@@ -128,17 +129,15 @@ public class Provider extends Person {
           }
           count++;
         }
-        else if (count > 5) {
-          Bill tempBill = new Bill();
+        else if (count > 5) {         
           if(count2 == 0){
+            tempBill = new Bill();
             tempBill.setDateCreated(strLine);
             count2++;
-          }
-          if(count2 == 1){
+          }else if(count2 == 1){
             tempBill.setDateServiceProvided(strLine);
             count2++;
-          }
-          if(count2 == 2){
+          }else if(count2 == 2){
             try {
               // the String to int conversion happens here
               int i = Integer.parseInt(strLine.trim());
@@ -148,8 +147,7 @@ public class Provider extends Person {
             catch (NumberFormatException nfe){
               System.out.println("NumberFormatException: " + nfe.getMessage());
             }
-          }
-          if(count2 == 3){
+          }else if(count2 == 3){
             try {
               // the String to int conversion happens here
               int i = Integer.parseInt(strLine.trim());
@@ -159,8 +157,7 @@ public class Provider extends Person {
             catch (NumberFormatException nfe){
               System.out.println("NumberFormatException: " + nfe.getMessage());
             }
-          }
-          if(count2 == 4){
+          }else if(count2 == 4){
             try {
               // the String to int conversion happens here
               int i = Integer.parseInt(strLine.trim());
@@ -170,13 +167,11 @@ public class Provider extends Person {
             catch (NumberFormatException nfe){
               System.out.println("NumberFormatException: " + nfe.getMessage());
             }
-          }
-          if(count2 == 5){
+          }else if(count2 == 5){
             tempBill.setComments(strLine);
+            services.add(tempBill);
             count2 = 0;
-          }
-          
-          services.add(tempBill);
+          }   
         }
       }
       //Close the input stream
