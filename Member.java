@@ -254,7 +254,7 @@ public class Member extends Person {
 
   //This method removes a member.
   public int removeMember(int id) {
-    String file_name = id + ".txt";
+    String file_name = memberFileName.replace("ID", id + "");
     File f = new File(file_name);
     if (f.exists()) {
       boolean success = f.delete();

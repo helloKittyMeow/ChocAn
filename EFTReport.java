@@ -21,7 +21,7 @@ public class EFTReport {
     try {
       File directory = new File(directoryName);
       directory.mkdirs();
-      DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+      DateFormat dateFormat = new SimpleDateFormat("MM-dd-yyyy");
       Date date = new Date();
     //  System.out.println(dateFormat.format(date));
       outFile = new File("./" + directoryName + "/" + "EFT" + " " + dateFormat.format(date) + ".txt");
@@ -50,7 +50,7 @@ public class EFTReport {
             providerFeeTotal += tempFee;
           }
           
-          pStream.println("Provider Fee Total: " + providerFeeTotal);
+          pStream.println("Provider Fee Total: " + String.format("$%.2f", providerFeeTotal));
           pStream.println();
         }
       }

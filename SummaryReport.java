@@ -25,7 +25,7 @@ public class SummaryReport {
     try {
       File directory = new File(directoryName);
       directory.mkdirs();
-      DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+      DateFormat dateFormat = new SimpleDateFormat("MM-dd-yyyy");
       Date date = new Date();
   //    System.out.println(dateFormat.format(date));
       outFile = new File("./" + directoryName + "/" + "Summary" + " " + dateFormat.format(date) + ".txt");
@@ -50,13 +50,13 @@ public class SummaryReport {
           while (services.hasNext()) {
             Bill service = (Bill)(services.next());
             tempFee = ProviderDirectory.getServiceFee(service.getServiceCode());
-            System.out.println("tempFee is " + tempFee);
+    //        System.out.println("tempFee is " + tempFee);
             providerConsultations += 1;
             providerFeeTotal += tempFee;
           }
           
           pStream.println("Number of Consultations: " + providerConsultations);
-          pStream.println("Provider Fee Total: " + providerFeeTotal);
+          pStream.println("Provider Fee Total: " + String.format("$%.2f", providerFeeTotal));
           pStream.println();
         }
         
@@ -69,7 +69,7 @@ public class SummaryReport {
       
       pStream.println("Providers With Services: " + providersWithServices); 
       pStream.println("Total Members Consulted: " + membersConsulted); 
-      pStream.println("Total Fee: " + feeTotal); 
+      pStream.println("Total Fee: " + String.format("$%.2f", feeTotal)); 
       
       pStream.close();
       System.out.println("\nSaved Summary Report");

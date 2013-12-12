@@ -210,8 +210,6 @@ public class Provider extends Person {
   
   //This method adds a provider.
   public void addProvider(){ 
-    int i = 0;
-    Provider provider = new Provider();
     
     setName(getToken("Enter the provider name: "));
     setID(getNumber("Enter the provider id: "));
@@ -225,7 +223,7 @@ public class Provider extends Person {
 
   //This method removes a provider.
   public int removeProvider(int id){
-    String file_name = id + ".txt";
+    String file_name = providerFileName.replace("ID", id + "");
     Provider provider = new Provider();
     File f = new File(file_name);
     if (f.exists()) {
